@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ernst Liu - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #475569;
+            --accent-color: #0ea5e9;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+        }
+        .dark {
+            --primary-color: #3b82f6;
+            --secondary-color: #94a3b8;
+            --accent-color: #38bdf8;
+            --background-color: #0f172a;
+            --card-background: #1e293b;
+            --text-color: #f1f5f9;
+            --text-light: #cbd5e1;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+        .contact-item:hover {
+            color: var(--primary-color);
+        }
+        .section {
+            background-color: var(--card-background);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 3px solid var(--background-color);
+        }
+        .timeline-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-item {
+            background-color: rgba(59, 130, 246, 0.1);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--primary-color);
+            transition: background-color 0.3s;
+        }
+        .skill-item:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+        .skill-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .skill-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .dark-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: var(--card-background);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        .dark-toggle:hover {
+            transform: rotate(180deg);
+        }
+        .language-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 6rem;
+            z-index: 1000;
+        }
+        .language-btn {
+            background-color: var(--card-background);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid var(--primary-color);
+        }
+        .language-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="dark-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+        <i data-lucide="moon" class="text-gray-600 dark:text-gray-300"></i>
+    </button>
+
+    <div class="language-switcher">
+        <a href="index.html" class="language-btn" aria-label="中文版本">
+            <i data-lucide="globe" class="mr-1"></i> 中文
+        </a>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/e3364949cbcf4422b1b3022e2da73000.jpg~tplv-a9rns2rl98-24:720:720.image?rcl=20251212144906F10FCB026807CF44E159&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1766126946&x-signature=fU3wLmUGh8DBrPAxpbjT7fdNYIs%3D" alt="Ernst Liu (Xuan Liu)" class="profile-photo">
+            <h1>Ernst Liu</h1>
+            <p>Physics | Semiconductor Materials Research</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i data-lucide="phone"></i>
+                    <span>18322150236</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>ek2458727844@qq.com</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span>Shanghai, China</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Nanjing University</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="user"></i>
+                Personal Information
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><strong>Name:</strong> Ernst Liu (Xuan Liu)</div>
+                <div><strong>Gender:</strong> Male</div>
+                <div><strong>Date of Birth:</strong> October 20, 2001</div>
+                <div><strong>Education:</strong> Bachelor of Physics</div>
+                <div><strong>University:</strong> Nanjing University</div>
+                <div><strong>Major:</strong> Physics</div>
+                <div><strong>Household Registration:</strong> Ninghe District, Tianjin</div>
+                <div><strong>Current Location:</strong> Baoshan District, Shanghai</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="briefcase"></i>
+                Professional Experience
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">March 2024 - June 2024</div>
+                    <div class="timeline-title">Undergraduate Research Assistant - Nanjing University</div>
+                    <div class="timeline-description">
+                        <p><strong>Supervisor:</strong> Associate Professor Bao Chunxiong (PhD Supervisor), School of Physics</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Led research on metal halide perovskite semiconductor devices; completed thesis <em>Transparent Luminescent & Photovoltaic Dual-Functional Perovskite Devices</em></li>
+                            <li>Fabricated 130+ transparent devices (blue-light emission + photovoltaic function) with 5+ hours of daily experiments; maintained detailed work logs</li>
+                            <li>Mastered core operations: perovskite solution preparation, substrate cleaning, thin-film spin-coating/evaporation, LED/battery performance testing</li>
+                            <li>Achieved leading performance: PLQY 10%, peak brightness 17,000 cd/㎡ (6V), EQE 7.5%, charge-discharge voltage 3.8V (stable), light transmittance 72%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 2022 - August 2022</div>
+                    <div class="timeline-title">Participant - International Scientific Training Program</div>
+                    <div class="timeline-description">
+                        <p><strong>Program:</strong> Nanjing University High Energy Physics "Cloud" Expedition</p>
+                        <p>Studied with scientists from CERN (Switzerland), KEK/J-PARC (Japan); gained insights into Beijing Electron Positron Collider & China Spallation Neutron Source.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">March 2021 - May 2022</div>
+                    <div class="timeline-title">Research Assistant - Nanjing University</div>
+                    <div class="timeline-description">
+                        <p><strong>Supervisor:</strong> Professor Wang Lei (PhD Supervisor, National Science Fund for Distinguished Young Scholars), School of Physics</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Researched two-dimensional semiconductor materials; proficient in silicon wafer cutting, material preparation, and operation of OM/AFM/EM</li>
+                            <li>Understood principles of annealing and electron microscopy-based etching</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="book"></i>
+                Coursework
+            </h2>
+            <div class="flex flex-wrap">
+                <span class="tag">Mechanics</span>
+                <span class="tag">Thermodynamics</span>
+                <span class="tag">Optics</span>
+                <span class="tag">Electrodynamics</span>
+                <span class="tag">Quantum Mechanics</span>
+                <span class="tag">Theoretical Mechanics</span>
+                <span class="tag">Nuclear Physics</span>
+                <span class="tag">Probability Theory</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="award"></i>
+                Additional Experience
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">March 2023 - August 2023</div>
+                    <div class="timeline-title">Operation Manager - "Mengchuang Coffee" (On-Campus Brand)</div>
+                    <div class="timeline-description">
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Launched and managed the brand from scratch: product R&D, staff training, strategy formulation</li>
+                            <li>Built a 500+ member private community; boosted daily turnover to a peak of ¥900</li>
+                            <li>Partnered with university departments for tea break events; sponsored 121st Nanjing University Anniversary</li>
+                            <li>Provided 20+ part-time positions for students</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 2022 - August 2022</div>
+                    <div class="timeline-title">Athlete - Nanjing University Wushu Team</div>
+                    <div class="timeline-description">
+                        <p>Won 6th place in Men's Tai Chi at the 20th Jiangsu Provincial Games (University Division).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">March 2022 - November 2022</div>
+                    <div class="timeline-title">Intern Host - "Xiaonan Time" Project</div>
+                    <div class="timeline-description">
+                        <p>Nanjing University Press Co., Ltd.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">October 2021 - November 2021</div>
+                    <div class="timeline-title">Script Advisor - National Ballet <em>A Dream of Red Mansions</em></div>
+                    <div class="timeline-description">
+                        <p>Invited by Associate Professor Wu Lisong (CCTV Lecture Room Speaker); participated in script discussions (premiered in February 2023).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2017 - May 2020</div>
+                    <div class="timeline-title">President - High School Student Union</div>
+                    <div class="timeline-description">
+                        <p>Oversaw all student union activities, organized large-scale events, enhanced team cohesion and service capabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="star"></i>
+                Core Competencies
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-title">Technical Skills</div>
+                    <div class="skill-description">Semiconductor material preparation/testing, perovskite device fabrication, microscopy operation (OM/AFM/EM)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">Professional Background</div>
+                    <div class="skill-description">Top-tier physics program (Top 3 in China) with in-depth semiconductor industry knowledge</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">Practical Ability</div>
+                    <div class="skill-description">Pioneered dual-functional perovskite devices; 500+ hours of experimental experience</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">Soft Skills</div>
+                    <div class="skill-description">Leadership, communication, text editing, hosting, marketing, project management</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">Mindset</div>
+                    <div class="skill-description">Hardworking, challenge-oriented; open to overtime/business trips for rapid growth</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="dollar-sign"></i>
+                Expected Salary
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><strong>Monthly:</strong> ¥13,000 - ¥18,000</div>
+                <div><strong>Annual:</strong> Negotiable</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dark mode toggle
+        const darkToggle = document.getElementById('dark-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        darkToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add click effects to cards
+        document.querySelectorAll('.section').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'translateY(-8px)';
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-5px)';
+                }, 200);
+            });
+        });
+
+        // Contact item interactions
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘轩 - 个人简历</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #475569;
+            --accent-color: #0ea5e9;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+        }
+        .dark {
+            --primary-color: #3b82f6;
+            --secondary-color: #94a3b8;
+            --accent-color: #38bdf8;
+            --background-color: #0f172a;
+            --card-background: #1e293b;
+            --text-color: #f1f5f9;
+            --text-light: #cbd5e1;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+        .contact-item:hover {
+            color: var(--primary-color);
+        }
+        .section {
+            background-color: var(--card-background);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 3px solid var(--background-color);
+        }
+        .timeline-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-item {
+            background-color: rgba(59, 130, 246, 0.1);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--primary-color);
+            transition: background-color 0.3s;
+        }
+        .skill-item:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+        .skill-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .skill-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .dark-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: var(--card-background);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        .dark-toggle:hover {
+            transform: rotate(180deg);
+        }
+        .language-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 6rem;
+            z-index: 1000;
+        }
+        .language-btn {
+            background-color: var(--card-background);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid var(--primary-color);
+        }
+        .language-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="dark-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+        <i data-lucide="moon" class="text-gray-600 dark:text-gray-300"></i>
+    </button>
+
+    <div class="language-switcher">
+        <a href="english.html" class="language-btn" aria-label="English Version">
+            <i data-lucide="globe" class="mr-1"></i> English
+        </a>
+    </div>
+    <div class="container">
+        <header class="header">
+            <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/e3364949cbcf4422b1b3022e2da73000.jpg~tplv-a9rns2rl98-24:720:720.image?rcl=20251212144906F10FCB026807CF44E159&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1766126946&x-signature=fU3wLmUGh8DBrPAxpbjT7fdNYIs%3D" alt="刘轩 (Ernst Liu)" class="profile-photo">
+            <h1>刘轩</h1>
+            <p>物理学 | 半导体材料研究</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i data-lucide="phone"></i>
+                    <span>18322150236</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>ek2458727844@qq.com</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span>上海市宝山区</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>南京大学</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="user"></i>
+                个人信息
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><strong>姓名：</strong> 刘轩 (Ernst Liu)</div>
+                <div><strong>性别：</strong> 男</div>
+                <div><strong>出生日期：</strong> 2001年10月20日</div>
+                <div><strong>学历：</strong> 全日制本科</div>
+                <div><strong>毕业院校：</strong> 南京大学</div>
+                <div><strong>专业：</strong> 物理学</div>
+                <div><strong>户籍：</strong> 天津市宁河区</div>
+                <div><strong>现居住地：</strong> 上海市宝山区</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="briefcase"></i>
+                工作经历
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年3月 - 2024年6月</div>
+                    <div class="timeline-title">南京大学物理学院 - 研究助理</div>
+                    <div class="timeline-description">
+                        <p>在博士生导师包春雄副教授带领下，进行金属卤化物钙钛矿半导体器件研究。</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>完成本科毕业论文《透明发光与光伏双功能钙钛矿器件》</li>
+                            <li>每日进行5小时以上实验工作，制作130余片透明器件</li>
+                            <li>实现荧光量子产率（PLQY）10%，峰值亮度17000cd/㎡，外量子效率（EQE）7.5%</li>
+                            <li>充放电最高电压达3.8V且过程稳定，光透过率72%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年7月 - 2022年8月</div>
+                    <div class="timeline-title">南京大学高能物理国际大科学装置"云"科考项目</div>
+                    <div class="timeline-description">
+                        <p>通过选拔参与为期两月的学习研讨，向欧洲核子研究中心CERN、日本高能加速器研究中心KEK和J-PARC的科学家学习。</p>
+                        <p>对北京正负电子对撞机、中国散裂中子源（东莞）有深入了解。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021年3月 - 2022年5月</div>
+                    <div class="timeline-title">南京大学物理学院 - 研究助理</div>
+                    <div class="timeline-description">
+                        <p>在王雷教授（青年科学基金项目入选者）课题组从事二维半导体材料研究。</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>掌握硅片切割、二维半导体材料制备技术</li>
+                            <li>熟练使用光学显微镜（OM）、原子力显微镜（AFM）、电子显微镜（EM）</li>
+                            <li>了解退火及电镜刻蚀等操作原理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="book"></i>
+                主修课程
+            </h2>
+            <div class="flex flex-wrap">
+                <span class="tag">力学</span>
+                <span class="tag">热学</span>
+                <span class="tag">光学</span>
+                <span class="tag">电动力学</span>
+                <span class="tag">量子力学</span>
+                <span class="tag">理论力学</span>
+                <span class="tag">原子核物理</span>
+                <span class="tag">概率论</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="award"></i>
+                其他经历
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年3月 - 2023年8月</div>
+                    <div class="timeline-title">梦创咖啡 - 运营负责人</div>
+                    <div class="timeline-description">
+                        <p>从零开始接手南京大学校内咖啡品牌经营，负责产品研发、员工培训及发展方向制定。</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>管理近500人的校内"咖啡私域"</li>
+                            <li>日营业额提升至峰值900元</li>
+                            <li>承接多场校内茶歇活动，校庆集市设展</li>
+                            <li>为20余名学生提供兼职机会</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年7月 - 2022年8月</div>
+                    <div class="timeline-title">江苏省第二十届运动会 - 运动员</div>
+                    <div class="timeline-description">
+                        <p>代表南京大学参加高校部武术（套路）比赛，取得男子太极拳项目第六名。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年3月 - 2022年11月</div>
+                    <div class="timeline-title">南京大学出版社 - 实习主播</div>
+                    <div class="timeline-description">
+                        <p>担任"小南时光"项目组主播，参与内容制作和推广。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021年10月 - 2021年11月</div>
+                    <div class="timeline-title">民族芭蕾舞剧《红楼梦》 - 剧本讨论小组成员</div>
+                    <div class="timeline-description">
+                        <p>受央视《百家讲坛》主讲人武黎嵩老师邀请，加入剧本讨论小组。该舞剧于2023年2月完成首演。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2017年 - 2020年5月</div>
+                    <div class="timeline-title">校学生会 - 主席</div>
+                    <div class="timeline-description">
+                        <p>全面负责学生会工作，组织策划多项大型活动，提升团队凝聚力和服务能力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="star"></i>
+                个人优势
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-title">学历背景</div>
+                    <div class="skill-description">985院校、学科排名全国前三物理系背景，专业基础扎实。</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">实验能力</div>
+                    <div class="skill-description">实验工作丰富，熟练掌握多种操作流程，动手能力强，实现了钙钛矿半导体材料器件功能从无到有的开拓。</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">行业认知</div>
+                    <div class="skill-description">熟悉半导体行业的工艺流程及发展趋势，具备前瞻性思维。</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">工作态度</div>
+                    <div class="skill-description">肯吃苦，愿意迎接挑战，事业发展初期十分期待加班、出差等任务，渴望快速提升个人能力。</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-title">综合素质</div>
+                    <div class="skill-description">组织领导、沟通交流、文字编辑、主持营销等能力突出，具备全方位发展潜力。</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="dollar-sign"></i>
+                期望薪酬
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><strong>月薪：</strong> 13-18k</div>
+                <div><strong>年薪：</strong> 面议</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dark mode toggle
+        const darkToggle = document.getElementById('dark-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        darkToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add click effects to cards
+        document.querySelectorAll('.section').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'translateY(-8px)';
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-5px)';
+                }, 200);
+            });
+        });
+
+        // Contact item interactions
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add typing animation to header
+        const headerTitle = document.querySelector('.header h1');
+        const text = headerTitle.textContent;
+        headerTitle.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                headerTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Start typing animation after page load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
